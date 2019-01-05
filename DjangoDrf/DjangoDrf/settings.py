@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django_filters',
     'corsheaders',
     'rest_framework.authtoken',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -96,7 +99,7 @@ DATABASES = {
         'USER':'root',
         'PASSWORD':'',
         'HOST':'',
-        'PORT':'3306', #端口
+        'PORT':'', #端口
 
         #mysql的数据库引擎有InnoDB 和 myisam
         #第三方登录的库要求使用innodb 否则会migration出错。
@@ -148,6 +151,10 @@ USE_TZ = False
 #重载用户登录逻辑,使得用户能用手机登录
 AUTHENTICATION_BACKENDS = (
     'users.views.CustomBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.weibo.WeiboOAuth2',
+    'social_core.backends.qq.QQOAuth2',
+    'social_core.backends.weixin.WeixinOAuth2',
 )
 
 # Static files (CSS, JavaScript, Images)
@@ -214,3 +221,16 @@ ali_pub_key_path = os.path.join(BASE_DIR, 'apps/trade/keys/alipay_key_2048.txt')
 
 #支付宝appid
 alipay_appid = "2016092300579459"
+
+# 第三方登录相关
+SOCIAL_AUTH_WEIBO_KEY = '546783846'
+SOCIAL_AUTH_WEIBO_SECRET = '6e40fe1efdc3b6474587770f3ce381f6'
+
+SOCIAL_AUTH_QQ_KEY = 'foobar'
+SOCIAL_AUTH_QQ_SECRET = 'bazqux'
+
+SOCIAL_AUTH_WEIXIN_KEY = 'foobar'
+SOCIAL_AUTH_WEIXIN_SECRET = 'bazqux'
+
+#授权完成后，返回的url页面
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'http://120.78.223.213/index'

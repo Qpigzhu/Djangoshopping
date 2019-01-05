@@ -81,11 +81,15 @@ urlpatterns = [
     path('', include(router.urls)),
 
     #使用jwt来登录
-    path('login/',obtain_jwt_token),
+    path('login/$',obtain_jwt_token),
 
     #支付宝接口
     path("alipay/retrun",AlipayView.as_view(),name="alipay"),
     # 首页
-    path('index/', TemplateView.as_view(template_name='index.html'))
+    path('index/', TemplateView.as_view(template_name='index.html')),
+
+
+    # 第三方登录
+    path('', include('social_django.urls', namespace='social'))
 
 ]
