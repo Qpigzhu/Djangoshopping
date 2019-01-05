@@ -94,8 +94,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mxshop',
         'USER':'root',
-        'PASSWORD':'123456',
-        'HOST':'120.78.223.213',
+        'PASSWORD':'',
+        'HOST':'',
         'PORT':'3306', #端口
 
         #mysql的数据库引擎有InnoDB 和 myisam
@@ -182,7 +182,17 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
+    #限速访问
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '5/minute', #匿名访问
+        'user': '10/minute' #登录后的访问
+    }
 }
+
 
 #JWT的设置
 import datetime

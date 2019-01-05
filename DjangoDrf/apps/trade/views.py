@@ -37,6 +37,38 @@ class ShoppingCartViewSet(viewsets.ModelViewSet):
 
     lookup_field ="goods_id"
 
+
+    #库存-1
+    def perform_create(self, serializer):
+        shop_cart = serializer.save()
+        goods = shop_cart.goods
+        goods.goods_num -= shop_cart.nums
+        goods.save()
+
+    #库存增加
+    def perform_destroy(self, instance):
+        goods = instance.goods
+        goods.goods_num += instance.nums
+        goods.save()
+        instance.delete()
+
+    #购物车修改，库存增或减,更新库存
+    def perform_update(self, serializer):
+        existed_record = ShoppingCart.objects.get(id=serializer.instance.id)
+        existed_nums = existed_record.nums
+        # 先保存之前的数据existed_nums
+        saved_record = serializer.save()
+        # 变化的数量
+        nums = saved_record - existed_nums
+        goods = saved_record.goods
+        goods.goods_num -= nums
+        goods.save()
+
+
+
+
+
+
     #动态序列化,现在的Serializer里面只有goods的主键id。需要动态的设置Serializer
     def get_serializer_class(self):
         if self.action == "list":
@@ -194,8 +226,9 @@ class AlipayView(APIView):
 
             for existed_order in existed_orders:
                 # 订单商品项
-                order_goods =  existed_order.goods.all()
-
+                #支付成功的销量加一
+                order_goods =  existed_order.goods.all() #反向取goods
+                # 商品销量增加订单中数值
                 for order_good in order_goods:
                     goods = order_good.goods
                     goods.sold_num += order_good.goods_num

@@ -8,6 +8,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework import filters
 from rest_framework.response import Response
+from rest_framework.throttling import UserRateThrottle,AnonRateThrottle
 
 
 
@@ -63,6 +64,8 @@ class GoodsList(mixins.ListModelMixin,mixins.RetrieveModelMixin,viewsets.Generic
     """
         GoodList 商品列表,分页,过滤
     """
+    #限速访问
+    throttle_classes = (UserRateThrottle,AnonRateThrottle)
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializers
 
