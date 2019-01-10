@@ -42,11 +42,11 @@ class OrderDetailSerializer(serializers.ModelSerializer):
     def get_alipay_url(self, obj):
         alipay = AliPay(
             appid="2016092300579459",
-            app_notify_url="http://127.0.0.1:8000/alipay/retrun",
+            app_notify_url="http://114.116.100.116/alipay/retrun",
             app_private_key_path=private_key_path,
             alipay_public_key_path=ali_pub_key_path,  # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥,
             debug=True,  # 默认False,
-            return_url="http://127.0.0.1:8000/alipay/retrun"
+            return_url="http://114.116.100.116/alipay/retrun"
         )
         url = alipay.direct_pay(
             subject=obj.order_sn,
@@ -125,11 +125,11 @@ class OrderInfoSerializers(serializers.ModelSerializer):
     def get_alipay_url(self,obj):
         alipay = AliPay(
             appid="2016092300579459",
-            app_notify_url="http://127.0.0.1:8000/alipay/retrun",
+            app_notify_url="http://114.116.100.116/alipay/retrun",
             app_private_key_path=private_key_path,
             alipay_public_key_path=ali_pub_key_path,  # 支付宝的公钥，验证支付宝回传消息使用，不是你自己的公钥,
             debug=True,  # 默认False,
-            return_url="http://127.0.0.1:8000/alipay/retrun"
+            return_url="http://114.116.100.116/alipay/retrun"
         )
         url = alipay.direct_pay(
             subject=obj.order_sn, #订单名字

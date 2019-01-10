@@ -81,7 +81,7 @@ urlpatterns = [
     path('', include(router.urls)),
 
     #使用jwt来登录
-    path('login/$',obtain_jwt_token),
+    re_path('^login/$',obtain_jwt_token),
 
     #支付宝接口
     path("alipay/retrun",AlipayView.as_view(),name="alipay"),

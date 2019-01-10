@@ -97,9 +97,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mxshop',
         'USER':'root',
-        'PASSWORD':'',
-        'HOST':'',
-        'PORT':'', #端口
+        'PASSWORD':'ZSH10201020',
+        'HOST':'114.116.100.116',
+        'PORT':'3306', #端口
 
         #mysql的数据库引擎有InnoDB 和 myisam
         #第三方登录的库要求使用innodb 否则会migration出错。
@@ -233,4 +233,4 @@ SOCIAL_AUTH_WEIXIN_KEY = 'foobar'
 SOCIAL_AUTH_WEIXIN_SECRET = 'bazqux'
 
 #授权完成后，返回的url页面
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = 'http://120.78.223.213/index'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/index/'

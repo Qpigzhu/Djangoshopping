@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="root@120.78.223.213:22">
+  <component name="PublishConfigData" serverName="root@114.116.100.116">
     <serverData>
       <paths name="mxshop">
         <serverdata>
@@ -9,7 +9,7 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="root@120.78.223.213:22">
+      <paths name="root@114.116.100.116">
         <serverdata>
           <mappings>
             <mapping deploy="/home/mxshop" local="$PROJECT_DIR$" />
